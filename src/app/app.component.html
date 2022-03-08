@@ -1,0 +1,21 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <mat-list-item *ngIf="tokenStorageService.isAuthenticate()">
+        <a routerLink="/dashboard" routerLinkActive="router-link-active">Dashboard</a>
+      </mat-list-item>
+      <mat-list-item *ngIf="!tokenStorageService.isAuthenticate()">
+        <a routerLink="/connexion" routerLinkActive="router-link-active">Login</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/clients" routerLinkActive="router-link-active">Clients</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/competences" routerLinkActive="router-link-active">Compétences</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

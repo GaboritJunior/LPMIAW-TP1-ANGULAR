@@ -1,0 +1,39 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field>
+        <mat-label for="name">Nom</mat-label>
+        <input type="text" matInput formControlName="name" id="name">
+    </mat-form-field>
+    <mat-error *ngIf="form.dirty || form.touched">
+        <span *ngIf="form.get('name')?.hasError('required')">
+            Le nom est obligatoire.
+        </span>
+        <span *ngIf="form.get('name')?.hasError('minlength')">
+            La description doit comporter plus de 2 caractères.
+        </span>
+    </mat-error>
+    <mat-form-field>
+        <mat-label for="description">Description</mat-label>
+        <textarea matInput formControlName="description" name="description" id="description" cols="30"
+            rows="10"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="date">Date du projet</mat-label>
+        <input matInput formControlName="date" name="date" id="date" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="type">Type de projet</mat-label>
+        <mat-select formControlName="type" name="type" id="type">
+            <mat-option value="site">Site Web</mat-option>
+            <mat-option value="seo">Référencement</mat-option>
+            <mat-option value="design">Webdesign</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button *ngIf="!this.route.snapshot.data['edit']" mat-raised-button color="primary">Ajouter le client</button>
+    <button *ngIf="this.route.snapshot.data['edit']" mat-raised-button color="primary">Modifier le client</button>
+    <button mat-button (click)="delete()">
+        <mat-icon>delete</mat-icon>
+        </button>
+        
+</form>
